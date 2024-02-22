@@ -17,3 +17,4 @@ simulation game.
 ## current implementations:
 - player movement
 - player character image
+- player animation/movement graphics
