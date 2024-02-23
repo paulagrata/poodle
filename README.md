@@ -21,6 +21,8 @@ simulation game.
 - toggle tools/plant seeds
 - tool animations
 - overlay for current tool and plant seed
+- map background
+- camera follows player
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
