@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         #self.image = pygame.Surface((32,64)) # original character = green box
         #self.image.fill('green')
         self.rect = self.image.get_rect(center = pos)
+        self.z = LAYERS['main']
 
         #movement attributes
         self.direction = pygame.math.Vector2()
