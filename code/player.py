@@ -26,14 +26,19 @@ class Player(pygame.sprite.Sprite):
 
         # timers
         self.timers = {
-            'tool use': Timer(350, self.use_tool)
+            'tool use': Timer(350, self.use_tool),
+            'tool switch': Timer(200)
         }
 
         # tools
-        self.selected_tool = 'axe'
+        self.tools = ['hoe','axe','water']
+        self.tool_index = 0
+        #self.selected_tool = 'axe'
+        self.selected_tool = self.tools[self.tool_index]
 
     def use_tool(self):
-        print(self.selected_tool)
+        #print(self.selected_tool)
+        pass
 
     def import_assets(self):
         self.animations = {
@@ -87,6 +92,14 @@ class Player(pygame.sprite.Sprite):
                 self.direction = pygame.math.Vector2()
                 self.frame_index = 0
 
+            # change tool [list index out of range need timer - only adds one not continously]
+            if keys[pygame.K_q] and not self.timers['tool switch'].active:
+                self.timers['tool switch'].activate()
+                self.tool_index += 1
+                # need to restart at first tool
+                self.tool_index = self.tool_index if self.tool_index < len(self.tools) else 0
+                self.selected_tool = self.tools[self.tool_index]
+
 
 
     def get_status(self):
@@ -102,7 +115,6 @@ class Player(pygame.sprite.Sprite):
     def update_timers(self):
         for timer in self.timers.values():
             timer.update()
-
 
     def move(self, dt):
 
