@@ -26,6 +26,7 @@ simulation game.
 - map background
 - camera follows player
 - map elements [animated water, wildflowers, trees]
+- map collisions
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
