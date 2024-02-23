@@ -6,9 +6,11 @@ simulation game.
 
 ## need: 
 - pygame
+- pytmx
 
 ## install:
 - `pip install pygame`
+- `pip install pytmx`
 
 ## instructions: 
 1. install dependencies
