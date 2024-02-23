@@ -25,6 +25,7 @@ simulation game.
 - overlay for current tool and plant seed
 - map background
 - camera follows player
+- map elements [animated water, wildflowers, trees]
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
