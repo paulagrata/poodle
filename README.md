@@ -18,5 +18,8 @@ simulation game.
 - player movement
 - player character image
 - player animation/movement graphics
+- toggle tools/plant seeds
+- tool animations
+- overlay for current tool and plant seed
 
 [vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/).
