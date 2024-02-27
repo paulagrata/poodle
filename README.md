@@ -27,6 +27,9 @@ simulation game.
 - camera follows player
 - map elements [animated water, wildflowers, trees]
 - map collisions
+- tree apples
+- can pick apples
+- axe tree to tree stump
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
