@@ -5,10 +5,24 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TILE_SIZE = 64
 
+# apple positions
+APPLE_POS = {
+	'Small': [(18,17), (30,37), (12,50), (30,45), (20,30), (30,10)],
+	'Large': [(30,24), (60,65), (50,50), (16,40),(45,50), (42,70)]
+}
+
 # overlay positions
 OVERLAY_POSITIONS = {
     'tool': (40, SCREEN_HEIGHT - 15),
     'seed': (70, SCREEN_HEIGHT - 5)
+}
+
+# tool hit boxes
+PLAYER_TOOL_OFFSET = {
+	'left': Vector2(-50,40),
+	'right': Vector2(50,40),
+	'up': Vector2(0,-10),
+	'down': Vector2(0,50)
 }
 
 # layers for map
@@ -22,11 +36,6 @@ LAYERS = {
     'ground plant': 6,
     'main': 7,
     'house top': 8,
-    'fruit': 9,
+	'fruit': 9,
     'rain drops': 10,
-}
-
-APPLE_POS = {
-	'Small': [(18,17), (30,37), (12,50), (30,45), (20,30), (30,10)],
-	'Large': [(30,24), (60,65), (50,50), (16,40),(45,50), (42,70)]
 }

@@ -1,6 +1,7 @@
 import pygame
 from settings import *
-from random import randint
+from random import randint, choice
+from timers import Timer
 
 class Generic(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups, z = LAYERS['main']):
@@ -40,17 +41,47 @@ class WildFlower(Generic):
         self.hitbox = self.rect.copy().inflate(-20,-self.rect.height * 0.9)
 
 class Tree(Generic):
-    def __init__(self, pos, surf, groups, name):
+    def __init__(self, pos, surf, groups, all_sprites, name):
         super().__init__(pos, surf, groups)
 
+
+        # tree attributes
+        self.health = 5
+        self.alive = True
+        stump_path = f'../graphics/stumps/{"small" if name == "Small" else "large"}.png'
+        self.stump_surf = pygame.image.load(stump_path).convert_alpha()
+        self.invul_timer = Timer(200)
+
         #apples
-        self.apple_surf = pygame.image.load('graphics/fruit/apple.png')
+        self.apple_surf = pygame.image.load('../graphics/fruit/apple.png')
         self.apple_pos = APPLE_POS[name]
         self.apple_sprites = pygame.sprite.Group()
-        self.create_fruit()
-        
+        self.create_fruit(all_sprites)
 
-    def create_fruit(self):
+    def damage(self):
+
+        # damaging the tree
+        self.health -= 1
+
+        # remove the apple
+        if len(self.apple_sprites.sprites()) > 0:
+            random_apple = choice(self.apple_sprites.sprites())
+            random_apple.kill()
+
+    
+    def check_death(self):
+        if self.health <= 0:
+            self.image = self.stump_surf
+            self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
+            self.hitbox = self.rect.copy().inflate(-10,-self.rect.height * 0.6) #width,height
+            self.alive = False
+            #print('she dead')
+    
+    def update(self,dt):
+        if self.alive:
+            self.check_death()
+
+    def create_fruit(self, all_sprites):
         for pos in self.apple_pos:
             if randint(0,10) < 2:
                 x = pos[0] + self.rect.left
@@ -58,5 +89,5 @@ class Tree(Generic):
                 Generic(
                     pos = (x,y), 
                     surf = self.apple_surf, 
-                    groups = [self.apple_sprites,self.groups()[0]],
+                    groups = [self.apple_sprites, all_sprites], #self.groups()[0] = self.collision_sprites
                     z = LAYERS['fruit'])

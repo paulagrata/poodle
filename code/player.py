@@ -6,7 +6,7 @@ from timers import Timer
 # pos - position
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites):
+    def __init__(self, pos, group, collision_sprites, tree_sprites):
         super().__init__(group)
 
         self.import_assets()
@@ -48,9 +48,26 @@ class Player(pygame.sprite.Sprite):
         self.seed_index = 0
         self.selected_seed = self.seeds[self.seed_index]
 
+        # interaction
+        self.tree_sprites = tree_sprites
+        
     def use_tool(self):
         #print(self.selected_tool)
-        pass
+        if self.selected_tool == 'hoe':
+            pass
+
+        if self.selected_tool == 'axe':
+            for tree in self.tree_sprites.sprites():
+                if tree.rect.collidepoint(self.target_pos):
+                    tree.damage()
+            
+
+        if self.selected_tool == 'water':
+            pass
+
+    def get_target_pos(self):
+
+        self.target_pos = self.rect.center + PLAYER_TOOL_OFFSET[self.status.split('_')[0]]
 
     def use_seed(self):
         pass
@@ -65,13 +82,12 @@ class Player(pygame.sprite.Sprite):
         }
 
         for animation in self.animations.keys():
-            full_path = 'graphics/character/' + animation
+            full_path = '../graphics/character/' + animation
             self.animations[animation] = import_folder(full_path)
         #print(self.animations)
 
-    def animate(self, dt):
+    def animate(self,dt):
         self.frame_index += 4 * dt
-
         if self.frame_index >= len(self.animations[self.status]):
             self.frame_index = 0 #returns back to 0 to loop animation
 
@@ -82,19 +98,19 @@ class Player(pygame.sprite.Sprite):
         
         if not self.timers['tool use'].active:
 			# directions 
-            if keys[pygame.K_UP]:
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.direction.y = -1
                 self.status = 'up'
-            elif keys[pygame.K_DOWN]:
+            elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
                 self.direction.y = 1
                 self.status = 'down'
             else:
                 self.direction.y = 0
 
-            if keys[pygame.K_RIGHT]:
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.direction.x = 1
                 self.status = 'right'
-            elif keys[pygame.K_LEFT]:
+            elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
                 self.direction.x = -1
                 self.status = 'left'
             else:
@@ -166,7 +182,6 @@ class Player(pygame.sprite.Sprite):
                         self.rect.centery = self.hitbox.centery
                         self.pos.y = self.hitbox.centery
 
-
     def move(self, dt):
 
         # normalizing a vector [making sure vector is always 1, length cannot be 0] 
@@ -192,5 +207,7 @@ class Player(pygame.sprite.Sprite):
         self.input()
         self.get_status()
         self.update_timers()
+        self.get_target_pos()
+
         self.move(dt)
         self.animate(dt)
