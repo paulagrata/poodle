@@ -9,6 +9,7 @@ from support import *
 
 class Level:
     def __init__(self):
+        import settings
 
         # get the display surface.
         self.display_surface = pygame.display.get_surface()
@@ -17,6 +18,8 @@ class Level:
         #self.all_sprites = pygame.sprite.Group()
         self.all_sprites = CameraGroup()
         self.collision_sprites = pygame.sprite.Group()
+
+        self.settings = settings
 
         self.setup()
         self.overlay = Overlay(self.player)
@@ -44,7 +47,7 @@ class Level:
 
         # trees 
         for obj in tmx_data.get_layer_by_name('Trees'):
-            Tree((obj.x,obj.y), obj.image, [self.all_sprites, self.collision_sprites], obj.name)
+            Tree((obj.x,obj.y), obj.image, [self.all_sprites,self.collision_sprites], obj.name)
 
         # wildflowers     
         for obj in tmx_data.get_layer_by_name('Decoration'):
@@ -52,7 +55,7 @@ class Level:
 
         # collion tiles     
         for x, y, surf in tmx_data.get_layer_by_name('Collision').tiles():
-            Generic((x * TILE_SIZE, y * TILE_SIZE), pygame.Surface((TILE_SIZE, TILE_SIZE)), [self.all_sprites,self.collision_sprites])
+            Generic((x * TILE_SIZE, y * TILE_SIZE), pygame.Surface((TILE_SIZE, TILE_SIZE)), [self.collision_sprites])
 
         # player
         for obj in tmx_data.get_layer_by_name('Player'):
