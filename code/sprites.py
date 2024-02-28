@@ -11,6 +11,12 @@ class Generic(pygame.sprite.Sprite):
         self.z = z
         self.hitbox = self.rect.copy().inflate(-self.rect.width * 0.2, -self.rect.height * 0.75)
 
+class Interaction(Generic):
+    def __init__(self, pos, size, groups, name):
+        surf = pygame.Surface(size)
+        super().__init__(pos, surf, groups)
+        self.name = name
+
 class Water(Generic):
     def __init__(self, pos, frames, groups):
 
@@ -56,7 +62,6 @@ class Particle(Generic):
         current_time =  pygame.time.get_ticks()
         if current_time - self.start_time > self.duration:
             self.kill()
-
 
 class Tree(Generic):
     def __init__(self, pos, surf, groups, all_sprites, name, player_add):
