@@ -32,6 +32,7 @@ simulation game.
 - axe tree to tree stump
 - particles per apple pick/tree removal
 - player's inventory [apples, wood]
+- night transition - resets apples
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
