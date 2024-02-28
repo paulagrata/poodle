@@ -59,7 +59,7 @@ class Player(pygame.sprite.Sprite):
         if self.selected_tool == 'axe':
             for tree in self.tree_sprites.sprites():
                 if tree.rect.collidepoint(self.target_pos):
-                    tree.damage()
+                    tree.damage(self.groups()[0])
             
 
         if self.selected_tool == 'water':
@@ -82,7 +82,7 @@ class Player(pygame.sprite.Sprite):
         }
 
         for animation in self.animations.keys():
-            full_path = '../graphics/character/' + animation
+            full_path = 'graphics/character/' + animation
             self.animations[animation] = import_folder(full_path)
         #print(self.animations)
 
@@ -203,7 +203,7 @@ class Player(pygame.sprite.Sprite):
         #self.pos += self.direction * self.speed * dt
         #self.rect.center = self.pos GRRRRRRRRRRRRRRR
 
-    def update(self, dt):
+    def update(self, dt, all_sprites):
         self.input()
         self.get_status()
         self.update_timers()

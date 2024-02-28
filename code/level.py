@@ -25,7 +25,7 @@ class Level:
         self.overlay = Overlay(self.player)
 
     def setup(self, all_sprites):
-        tmx_data = load_pygame('../data/map.tmx')
+        tmx_data = load_pygame('data/map.tmx')
 
         # house
         for layer in ['HouseFloor', 'HouseFurnitureBottom']:
@@ -41,7 +41,7 @@ class Level:
             Generic((x * TILE_SIZE, y * TILE_SIZE), surf, [self.all_sprites, self.collision_sprites])
         
         # water 
-        water_frames = import_folder('../graphics/water')
+        water_frames = import_folder('graphics/water')
         for x, y, surf in tmx_data.get_layer_by_name('Water').tiles():
             Water((x * TILE_SIZE, y * TILE_SIZE), water_frames, self.all_sprites)
 
@@ -68,7 +68,7 @@ class Level:
 
         Generic(
             pos = (0,0), 
-            surf = pygame.image.load('../graphics/world/ground.png').convert_alpha(), 
+            surf = pygame.image.load('graphics/world/ground.png').convert_alpha(), 
             groups = self.all_sprites,
             z = LAYERS['ground']
             )
@@ -77,7 +77,7 @@ class Level:
         self.display_surface.fill('pink')
         #self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
-        self.all_sprites.update(dt)
+        self.all_sprites.update(dt, self.all_sprites)
         
         self.overlay.display()
 
