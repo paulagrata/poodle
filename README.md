@@ -30,6 +30,7 @@ simulation game.
 - tree apples
 - can pick apples
 - axe tree to tree stump
+- particles per apple pick/tree removal
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
