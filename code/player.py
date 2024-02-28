@@ -6,7 +6,7 @@ from timers import Timer
 # pos - position
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction):
+    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction, soil_layer):
         super().__init__(group)
 
         self.import_assets()
@@ -60,11 +60,13 @@ class Player(pygame.sprite.Sprite):
         self.tree_sprites = tree_sprites
         self.interaction = interaction
         self.sleep = False
+        self.soil_layer = soil_layer
         
     def use_tool(self):
         #print(self.selected_tool)
+
         if self.selected_tool == 'hoe':
-            pass
+            self.soil_layer.get_hit(self.target_pos)
 
         if self.selected_tool == 'axe':
             for tree in self.tree_sprites.sprites():
@@ -85,7 +87,7 @@ class Player(pygame.sprite.Sprite):
         self.animations = {
             'up': [], 'down' : [], 'left': [], 'right' : [],
             'up_idle': [], 'down_idle' : [], 'left_idle': [], 'right_idle' : [],
-            'up_hoe': [], 'down_hoe' : [], 'left_hoe': [], 'right_idle' : [],
+            'up_hoe': [], 'down_hoe' : [], 'left_hoe': [], 'right_hoe' : [],
             'up_axe': [], 'down_axe' : [], 'left_axe': [], 'right_axe' : [],
             'up_water': [], 'down_water' : [], 'left_water': [], 'right_water' : [],
         }
