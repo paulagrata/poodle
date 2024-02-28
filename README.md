@@ -33,6 +33,8 @@ simulation game.
 - particles per apple pick/tree removal
 - player's inventory [apples, wood]
 - night transition - resets apples
+- create soil w/ hoe
+- soil tiles connect per mult img
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
