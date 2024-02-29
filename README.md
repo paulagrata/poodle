@@ -35,6 +35,7 @@ simulation game.
 - night transition - resets apples
 - create soil w/ hoe
 - soil tiles connect per mult img
+- can water soil / resets when player sleeps
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
