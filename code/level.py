@@ -105,6 +105,9 @@ class Level:
                 apple.kill()
             tree.create_fruit(self.all_sprites)
 
+        # soil
+        self.soil_layer.remove_water()
+
     def run(self,dt):
         self.display_surface.fill('pink')
         #self.all_sprites.draw(self.display_surface)
