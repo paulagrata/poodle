@@ -41,6 +41,7 @@ simulation game.
 - plant seeds
 - seeds grow when watered
 - collision w/ plant when not seed
+- harvestable plants + adds to inventory
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
