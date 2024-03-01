@@ -7,6 +7,8 @@ from pytmx.util_pygame import load_pygame
 from support import *
 from transition import Transition
 from soil import SoilLayer
+from sky import Rain
+from random import randint
 
 
 class Level:
@@ -26,8 +28,12 @@ class Level:
         self.setup(all_sprites=self.all_sprites)
         self.overlay = Overlay(self.player)
         self.transition = Transition(self.reset,self.player)
-        
 
+        # sky
+        self.rain = Rain(self.all_sprites)
+        self.raining = randint(0,10) > 3 #true: on, false: off
+        self.soil_layer.raining = self.raining
+        
     def setup(self, all_sprites):
         tmx_data = load_pygame('data/map.tmx')
 
@@ -98,15 +104,22 @@ class Level:
         self.player.item_inventory[item] += 1
 
     def reset(self):
+
+        # soil
+        self.soil_layer.remove_water()
+
+        # randomize the rain
+        self.raining = randint(0,10) > 3 
+        self.soil_layer.raining = self.raining
+        if self.raining:
+            # waters soil if raining
+            self.soil_layer.water_all()
         
         # apples on the trees
         for tree in self.tree_sprites.sprites():
             for apple in tree.apple_sprites.sprites():
                 apple.kill()
             tree.create_fruit(self.all_sprites)
-
-        # soil
-        self.soil_layer.remove_water()
 
     def run(self,dt):
         self.display_surface.fill('pink')
@@ -117,6 +130,11 @@ class Level:
         self.overlay.display()
         #print(self.player.item_inventory)
 
+        #rain
+        if self.raining:
+            self.rain.update(dt, self.all_sprites)
+
+        # transition overlay
         if self.player.sleep:
             self.transition.play()
 
@@ -126,11 +144,11 @@ class CameraGroup(pygame.sprite.Group):
         self.display_surface = pygame.display.get_surface()
         self.offset = pygame.math.Vector2()
 
-
     def custom_draw(self, player):
         #if player moves left, camera moves right
         self.offset.x = player.rect.centerx - SCREEN_WIDTH / 2
         self.offset.y = player.rect.centery - SCREEN_HEIGHT / 2
+
         for layer in LAYERS.values():
             for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
                 if sprite.z == layer:

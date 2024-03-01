@@ -64,6 +64,9 @@ class SoilLayer:
                     #print('boop. farmable')
                     self.grid[y][x].append('X')
                     self.create_soil_tiles()
+
+                    if self.raining:
+                        self.water_all()
     
     def water(self, target_pos):
         for soil_sprite in self.soil_sprites.sprites():
@@ -78,6 +81,20 @@ class SoilLayer:
                     surf = choice(self.water_surfs), 
                     groups =[self.all_sprites, self.water_sprites] )
 
+    def water_all(self):
+        print("water_all() called")  # Check if the method is being called
+        for index_row, row in enumerate(self.grid):
+            for index_col, cell in enumerate(row):
+                if 'X' in cell and 'W' not in cell:
+                    print(f"Creating WaterTile at ({index_col}, {index_row})")  # Print the position of each WaterTile
+                    cell.append('W')
+                    x = index_col * TILE_SIZE
+                    y = index_row * TILE_SIZE
+                    WaterTile(
+                    pos = (x,y), 
+                    surf = choice(self.water_surfs), 
+                    groups =[self.all_sprites, self.water_sprites] )
+
     def remove_water(self):
 
         # destroy water sprites
@@ -88,7 +105,6 @@ class SoilLayer:
                 for cell in row:
                     if 'W' in cell:
                         cell.remove('W')
-
 
     def create_soil_tiles(self):
         self.soil_sprites.empty()
