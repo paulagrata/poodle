@@ -2,7 +2,7 @@ import pygame
 from settings import *
 from player import Player
 from overlay import Overlay
-from sprites import Generic, Water, WildFlower, Tree, Interaction
+from sprites import Generic, Water, WildFlower, Tree, Interaction, Particle
 from pytmx.util_pygame import load_pygame
 from support import *
 from transition import Transition
@@ -103,6 +103,20 @@ class Level:
     def player_add(self,item):
         self.player.item_inventory[item] += 1
 
+    def plant_collision(self):
+        if self.soil_layer.plant_sprites:
+            for plant in self.soil_layer.plant_sprites.sprites():
+                if plant.harvestable and plant.rect.colliderect(self.player.hitbox):
+                    self.player_add(plant.plant_type)
+                    plant.kill()
+                    Particle(
+                        pos = plant.rect.topleft, 
+                        surf = plant.image, 
+                        groups = self.all_sprites, 
+                        z = LAYERS['main'])
+                    self.soil_layer.grid[plant.rect.centery // TILE_SIZE][plant.rect.centerx // TILE_SIZE].remove('P')   # row y of plant ,column x of plant
+
+
     def reset(self):
 
         # plants [must be called before soil/rain]
@@ -129,9 +143,9 @@ class Level:
         #self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
         self.all_sprites.update(dt, self.all_sprites)
+        self.plant_collision()
         
         self.overlay.display()
-        #print(self.player.item_inventory)
 
         #rain
         if self.raining:
@@ -140,6 +154,9 @@ class Level:
         # transition overlay
         if self.player.sleep:
             self.transition.play()
+
+        # testing [debug]:
+        #print(self.player.item_inventory)      # prints player's inventory
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
