@@ -43,6 +43,7 @@ simulation game.
 - collision w/ plant when not seed
 - harvestable plants + adds to inventory
 - day to night transition
+- merchant!! [shop]
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
