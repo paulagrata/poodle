@@ -32,7 +32,7 @@ simulation game.
 - axe tree to tree stump
 - particles per apple pick/tree removal
 - player's inventory [apples, wood]
-- night transition - resets apples
+- go to sleep - resets apples
 - create soil w/ hoe
 - soil tiles connect per mult img
 - can water soil / resets when player sleeps
@@ -42,6 +42,7 @@ simulation game.
 - seeds grow when watered
 - collision w/ plant when not seed
 - harvestable plants + adds to inventory
+- day to night transition
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
