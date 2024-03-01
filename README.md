@@ -38,6 +38,8 @@ simulation game.
 - can water soil / resets when player sleeps
 - randomized rain
 - rain will water soil
+- plant seeds
+- seeds grow when watered
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
