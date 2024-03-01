@@ -36,6 +36,8 @@ simulation game.
 - create soil w/ hoe
 - soil tiles connect per mult img
 - can water soil / resets when player sleeps
+- randomized rain
+- rain will water soil
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
