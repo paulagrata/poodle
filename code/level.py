@@ -9,6 +9,7 @@ from transition import Transition
 from soil import SoilLayer
 from sky import Rain, Sky
 from random import randint
+from menu import Menu
 
 
 class Level:
@@ -34,6 +35,10 @@ class Level:
         self.raining = randint(0,10) > 3 #true: on, false: off
         self.soil_layer.raining = self.raining
         self.sky = Sky()
+
+        # shop
+        self.menu = Menu(self.player, self.toggle_shop)
+        self.shop_active = False
         
     def setup(self, all_sprites):
         tmx_data = load_pygame('data/map.tmx')
@@ -84,9 +89,17 @@ class Level:
                     collision_sprites = self.collision_sprites,
                     tree_sprites = self.tree_sprites,
                     interaction = self.interaction_sprites,
-                    soil_layer = self.soil_layer)
+                    soil_layer = self.soil_layer,
+                    toggle_shop = self.toggle_shop)
                 
             if obj.name == 'Bed':
+                Interaction(
+                    pos = (obj.x, obj.y), 
+                    size = (obj.width, obj.height), 
+                    groups = self.interaction_sprites, 
+                    name = obj.name)
+                
+            if obj.name == 'Trader':
                 Interaction(
                     pos = (obj.x, obj.y), 
                     size = (obj.width, obj.height), 
@@ -103,6 +116,10 @@ class Level:
 
     def player_add(self,item):
         self.player.item_inventory[item] += 1
+
+    def toggle_shop(self):
+
+        self.shop_active = not self.shop_active #switching on and off.
 
     def plant_collision(self):
         if self.soil_layer.plant_sprites:
@@ -142,20 +159,24 @@ class Level:
         self.sky.start_color = [255,255,255]
 
     def run(self,dt):
+
+        # drawing logic
         self.display_surface.fill('pink')
         #self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
-        self.all_sprites.update(dt, self.all_sprites)
-        self.plant_collision()
+
+        # updates
+        if self.shop_active:
+            self.menu.update()
+        else:
+            self.all_sprites.update(dt, self.all_sprites)
+            self.plant_collision()
         
+        # weather 
         self.overlay.display()
-
-        #rain
-        if self.raining:
+        if self.raining and not self.shop_active:   # rain
             self.rain.update(dt, self.all_sprites)
-
-        # daytime 
-        self.sky.display(dt)
+        self.sky.display(dt)                        # daytime 
 
         # transition overlay
         if self.player.sleep:
@@ -163,6 +184,7 @@ class Level:
 
         # testing [debug]:
         #print(self.player.item_inventory)      # prints player's inventory
+        #print(self.shop_active)                 # prints if shop is active
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
