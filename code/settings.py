@@ -39,3 +39,9 @@ LAYERS = {
 	'fruit': 9,
     'rain drops': 10,
 }
+
+# plant grow speed
+GROW_SPEED = {
+    'corn': 1,
+    'tomato': 0.7
+}
