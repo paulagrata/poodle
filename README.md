@@ -2,7 +2,7 @@
 wip. :D [don't look yet]
 
 ## description:
-simulation game.
+a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, weather effects, and a merchant system. Utilizing Tiled for expandability, the game encompasses intricate mechanics such as player movement, tool usage, plant seeding, harvesting, and inventory management. With detailed graphics, dynamic animations, and interactive elements including collisions and particle effects, players embark on a journey filled with challenges, exploration, and commerce. Future updates will introduce additional features such as NPCs, enemies that spawn at night, and lots of other fun easter egss that will enhance the depth of the gaming experience.
 
 ## need: 
 - pygame
@@ -44,7 +44,8 @@ simulation game.
 - harvestable plants + adds to inventory
 - day to night transition
 - merchant!! [shop]
-- added buy/sell functionality
+- buy/sell functionality
+- audio [background music, tool, inventory add]
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
