@@ -24,7 +24,7 @@ class Plant(pygame.sprite.Sprite):
 
         # set up
         self.plant_type = plant_type
-        self.frames = import_folder(f'graphics/fruit/{plant_type}')
+        self.frames = import_folder(f'../graphics/fruit/{plant_type}')
         self.soil = soil
         self.check_watered = check_watered
 
@@ -66,27 +66,27 @@ class SoilLayer:
         self.plant_sprites  = pygame.sprite.Group() 
 
         # graphics
-        self.soil_surfs = import_folder_dict('graphics/soil/')
-        self.water_surfs = import_folder('graphics/soil_water')
+        self.soil_surfs = import_folder_dict('../graphics/soil/')
+        self.water_surfs = import_folder('../graphics/soil_water')
 
         # requirements [if area is farmable, if soil has been watered, if soil has plant]
         self.create_soil_grid()
         self.create_hit_rects()
 
         # sounds
-        self.hoe_sound = pygame.mixer.Sound('audio/hoe.wav')
+        self.hoe_sound = pygame.mixer.Sound('../audio/hoe.wav')
         self.hoe_sound.set_volume(0.05)
-        self.plant_sound = pygame.mixer.Sound('audio/plant.wav')
+        self.plant_sound = pygame.mixer.Sound('../audio/plant.wav')
         self.plant_sound.set_volume(0.1)
 
     def create_soil_grid(self):
-        ground = pygame.image.load('graphics/world/ground.png')
+        ground = pygame.image.load('../graphics/world/ground.png')
         h_tiles, v_tiles = ground.get_width() // TILE_SIZE, ground.get_height() // TILE_SIZE # 50,40
 
 
         self.grid = [[[] for col in range(h_tiles)] for row in range(v_tiles)]
 
-        for x,y, _ in load_pygame('data/map.tmx').get_layer_by_name('Farmable').tiles(): # _ for surface, dont need
+        for x,y, _ in load_pygame('../data/map.tmx').get_layer_by_name('Farmable').tiles(): # _ for surface, dont need
             self.grid[y][x].append('F')
 
     def create_hit_rects(self):
