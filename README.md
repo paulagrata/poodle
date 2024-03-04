@@ -1,5 +1,5 @@
 # poodle
-wip. :D [don't look yet]
+tutorial version, future updates will be in a new version.
 
 ## description:
 a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, weather effects, and a merchant system. Utilizing Tiled for expandability, the game encompasses intricate mechanics such as player movement, tool usage, plant seeding, harvesting, and inventory management. With detailed graphics, dynamic animations, and interactive elements including collisions and particle effects, players embark on a journey filled with challenges, exploration, and commerce. Future updates will introduce additional features such as NPCs, enemies that spawn at night, and lots of other fun easter egss that will enhance the depth of the gaming experience.
@@ -14,7 +14,8 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 
 ## instructions: 
 1. install dependencies
-2. run program `python poodle.py`
+2. open `poodle/code` folder
+3. run program `python poodle.py`
 
 ## current implementations:
 - player movement
