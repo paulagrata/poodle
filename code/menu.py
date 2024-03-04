@@ -87,8 +87,6 @@ class Menu:
                         self.player.seed_inventory[current_item] += 1
                         self.player.money -= PURCHASE_PRICES[current_item]
                         
-
-
         #clamo the values
         if self.index < 0:
             self.index = len(self.options) - 1
