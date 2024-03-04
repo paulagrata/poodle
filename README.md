@@ -44,6 +44,7 @@ simulation game.
 - harvestable plants + adds to inventory
 - day to night transition
 - merchant!! [shop]
+- added buy/sell functionality
 
 [[vidlink](https://www.youtube.com/watch?v=T4IX36sP_0c&t=85s/)]
 
